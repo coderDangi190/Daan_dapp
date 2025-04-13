@@ -1,63 +1,60 @@
-<<<<<<< HEAD
+Crowdfunding Web3 Ethereum-Based App
+Problem Statement
+In today's digital age, crowdfunding has become a popular way for individuals and businesses to raise funds for their projects and ideas. However, many existing crowdfunding platforms suffer from issues like high fees, lack of transparency, and centralized control. Our Web3 Ethereum-based crowdfunding app aims to solve these problems by providing a decentralized platform where users can create and fund campaigns in a trustless, transparent, and secure environment.
 
-![tw-banner](https://github.com/thirdweb-example/next-starter/assets/57885104/20c8ce3b-4e55-4f10-ae03-2fe4743a5ee8)
+Key challenges we address:
 
-# thirdweb-next-starter
+Centralized control: Traditional crowdfunding platforms are controlled by a central entity, leading to issues of transparency, trust, and censorship.
 
-Starter template to build an onchain react native app with [thirdweb](https://thirdweb.com/) and [next](https://nextjs.org/).
+High fees: Centralized platforms often charge high fees, reducing the amount of funds reaching the intended causes.
 
-## Installation
+Lack of transparency: It's difficult to track where funds are going and how they are being used in centralized systems.
 
-Install the template using [thirdweb create](https://portal.thirdweb.com/cli/create)
+Our app leverages the power of Ethereum smart contracts and Web3 technologies to create a decentralized, transparent, and cost-effective crowdfunding platform.
 
-```bash
-  npx thirdweb create app --next
-```
+System Architecture
+The system architecture of the crowdfunding app is designed to be scalable, secure, and user-friendly. Below is an overview of the components:
 
-## Environment Variables
+Frontend:
 
-To run this project, you will need to add the following environment variables to your .env file:
+Built with Next.js and TypeScript to provide a dynamic and responsive user experience.
 
-`CLIENT_ID`
+Tailwind CSS for styling the UI with utility-first CSS.
 
-To learn how to create a client ID, refer to the [client documentation](https://portal.thirdweb.com/typescript/v5/client). 
+The frontend interacts with Ethereum through Web3.js or Ethers.js, allowing users to connect their wallets (like MetaMask) and interact with the blockchain.
 
-## Run locally
+Smart Contracts:
 
-Install dependencies
+Solidity is used to write the Ethereum smart contracts that manage the crowdfunding logic.
 
-```bash
-yarn
-```
+The contracts are responsible for handling user contributions, campaign creation, and fund distribution in a decentralized and secure manner.
 
-Start development server
+The smart contracts interact with the Ethereum blockchain, ensuring transparency and immutability of all transactions.
 
-```bash
-yarn dev
-```
+Blockchain:
 
-Create a production build
+Ethereum is used as the blockchain for recording all contributions and campaigns.
 
-```bash
-yarn build
-```
+The decentralized nature of Ethereum ensures that all data is immutable and transparent, preventing fraud and ensuring fairness.
 
-Preview the production build
+Web3 Integration:
 
-```bash
-yarn start
-```
+Users can interact with the blockchain using MetaMask or other Web3 wallets, ensuring secure and easy transactions.
 
-## Resources
+The architecture ensures a seamless integration of the frontend and backend, enabling users to interact with the Ethereum blockchain without worrying about the underlying complexities.
 
-- [Documentation](https://portal.thirdweb.com/typescript/v5)
-- [Templates](https://thirdweb.com/templates)
-- [YouTube](https://www.youtube.com/c/thirdweb)
-- [Blog](https://blog.thirdweb.com)
+Instructions to Run the App
+Prerequisites
+Node.js (v16 or above)
 
-## Need help?
+MetaMask (or any Web3 wallet)
 
-For help or feedback, please [visit our support site](https://thirdweb.com/support)
-=======
-# Daan_dapp
->>>>>>> 9e1efe8500f7a2a7de01046dbcecc2366fbcf0ef
+Hardhat (for deploying smart contracts)
+
+Team members and their role
+Sanjaya = UI/UX
+Pankaj = Project Lead
+Navraj = Frontend
+Sandip = Smart Contract Developer
+
+
