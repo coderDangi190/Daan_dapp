@@ -1,4 +1,4 @@
-name: CI/CD - Docker to ACR to Azure Web App
+name: CI/CD - Docker to ACR (Web App pulls latest)
 
 on:
   push:
@@ -25,36 +25,21 @@ jobs:
       - run: npm test
       - run: npm run build
 
-  build_push_deploy:
+  build_and_push:
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      # OIDC Login to Azure (no passwords)
-      - name: Azure Login (OIDC)
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: ACR Login
-        run: az acr login --name ${{ secrets.ACR_NAME }}
+      - name: Docker login to ACR
+        run: |
+          echo "${{ secrets.ACR_PASSWORD }}" | docker login ${{ secrets.ACR_LOGIN_SERVER }} \
+            -u "${{ secrets.ACR_USERNAME }}" --password-stdin
 
       - name: Build & Push Docker image
         run: |
-          ACR_LOGIN_SERVER=$(az acr show -n ${{ secrets.ACR_NAME }} --query loginServer -o tsv)
-          IMAGE="$ACR_LOGIN_SERVER/${{ env.IMAGE_NAME }}"
+          IMAGE="${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}"
           docker build -t $IMAGE:${{ github.sha }} -t $IMAGE:latest .
           docker push $IMAGE:${{ github.sha }}
           docker push $IMAGE:latest
-
-      - name: Deploy to Azure Web App (Container)
-        run: |
-          ACR_LOGIN_SERVER=$(az acr show -n ${{ secrets.ACR_NAME }} --query loginServer -o tsv)
-          az webapp config container set \
-            --name ${{ secrets.WEBAPP_NAME }} \
-            --resource-group rg-daan-prod \
-            --docker-custom-image-name $ACR_LOGIN_SERVER/${{ env.IMAGE_NAME }}:latest
